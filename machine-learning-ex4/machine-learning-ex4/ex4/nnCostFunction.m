@@ -62,7 +62,36 @@ Theta2_grad = zeros(size(Theta2));
 %               and Theta2_grad from Part 2.
 %
 
+X = [ones(m, 1) X] %add the column of 1's to the matrix
 
+for i = 1:m
+  a1 = X(i,:)'
+  a2 = [1; sigmoid(Theta1*a1)]
+  a3 = sigmoid(Theta2*a2)
+  
+  h = a3
+  
+  yVector = (1:num_labels) == y(i)
+  
+ J = J + sum(-yVector.*log(h) - (1 - yVector).*log(1 - h))
+ 
+ %backpropagation
+ delta3 = a3 - yVector;
+ delta2 = Theta2'*delta3 .* (a2.*(1 - a2))
+ Theta2_grad = Theta2_grad + delta3*a2'
+ Theta1_grad = Theta1_grad + delta2*a1'
+ 
+  
+  
+endfor
+
+%scaling cost function and gradient
+J = J/m
+Theta1_grad = Theta1_grad/m
+Theta2_grad = Theta2_grad/m
+
+reg = (lambda /(2*m)) * (sumsq(Theta1(:, 2 : end)(:)) + sumsq(Theta2(:, 2: end)(:)))
+Theta1_grad = Theta1_grad + (lambda/m)* + 
 
 
 
