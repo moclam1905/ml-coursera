@@ -71,15 +71,15 @@ for i = 1:m
   
   h = a3
   
-  yVector = (1:num_labels) == y(i)
+  yVector = (1:num_labels)' == y(i)
   
  J = J + sum(-yVector.*log(h) - (1 - yVector).*log(1 - h))
  
  %backpropagation
  delta3 = a3 - yVector;
  delta2 = Theta2'*delta3 .* (a2.*(1 - a2))
- Theta2_grad = Theta2_grad + delta3*a2'
- Theta1_grad = Theta1_grad + delta2*a1'
+ Theta2_grad = Theta2_grad + delta3 * a2'
+ Theta1_grad = Theta1_grad + delta2(2:end) * a1'
  
   
   
@@ -91,7 +91,11 @@ Theta1_grad = Theta1_grad/m
 Theta2_grad = Theta2_grad/m
 
 reg = (lambda /(2*m)) * (sumsq(Theta1(:, 2 : end)(:)) + sumsq(Theta2(:, 2: end)(:)))
-Theta1_grad = Theta1_grad + (lambda/m)* + 
+J = J + reg
+
+Theta1_grad = Theta1_grad + (lambda/m)* + [zeros(size(Theta1,1),1) Theta1(:,2:end)]
+Theta2_grad = Theta2_grad + (lambda/m)* + [zeros(size(Theta2,1),1) Theta2(:,2:end)]
+
 
 
 
