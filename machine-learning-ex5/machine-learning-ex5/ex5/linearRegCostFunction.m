@@ -22,7 +22,13 @@ grad = zeros(size(theta));
 
 
 
+h = X * theta
+errors = h - y 
+J = sumsq(errors) /(2*m)
+grad = (1/m)*X'*errors
 
+J = J + (lambda/(2*m)) * sumsq(theta(2:end))
+grad = grad + (lambda/m) * [0;theta(2:end)]
 
 
 
