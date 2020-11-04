@@ -29,7 +29,7 @@ clear ; close all; clc
 fprintf('\nPreprocessing sample email (emailSample1.txt)\n');
 
 % Extract Features
-file_contents = readFile('emailSample1.txt');
+file_contents = readFile('emailSample2.txt');
 word_indices  = processEmail(file_contents);
 
 % Print Stats
