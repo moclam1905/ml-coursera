@@ -18,13 +18,16 @@ idx = zeros(size(X,1), 1);
 %               closest to example i. Hence, it should be a value in the 
 %               range 1..K
 %
-% Note: You can use a for-loop over the examples to compute this.
-%
+% Note: You can use a for-loop over the examples to compute
 
-
-
-
-
+for i =1 : size(X,1)
+  distances = zeros(size(centroids,1), 1)
+  for k=1 : K
+    distances(k) = sumsq(X(i,:) - centroids(k,:))
+  endfor
+  [minValue, minIndex] = min(distances)
+  idx(i) = minIndex
+endfor
 
 
 % =============================================================
