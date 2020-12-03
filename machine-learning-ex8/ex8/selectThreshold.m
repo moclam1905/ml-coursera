@@ -23,6 +23,15 @@ for epsilon = min(pval):stepsize:max(pval)
     % Note: You can use predictions = (pval < epsilon) to get a binary vector
     %       of 0's and 1's of the outlier predictions
 
+predictions = pval < epsilon
+TP = sum((predictions ==1 ) & (yval == 1))
+FP = sum((predictions == 1) &  (yval == 0))
+FN = sum((predictions == 0) & (yval == 1))
+precision = TP/(TP + FP)
+recall = TP/(TP + FN)
+%Harmonic mean 
+F1 = 2*precision*recall /(precision+recall)
+
 
 
 
