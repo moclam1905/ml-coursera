@@ -48,8 +48,9 @@ J = 0.5 * sumsq(err(:))
 X_grad = err*Theta
 Theta_grad = err' * X 
 
-J = J + (lamda/2) * (sumsq(X(:) + sumsq(Theta(:)))
-
+J = J + (lambda/2) * (sumsq(X(:)) + sumsq(Theta(:)))
+X_grad = X_grad + lambda * X
+Theta_grad = Theta_grad + lambda * Theta
 
 
 
